@@ -1,0 +1,89 @@
+
+CREATE TABLE Equipment
+(
+	Equipment_No	  INTEGER  NULL ,
+	nameEquipment	  VARCHAR2(300)  NOT NULL 
+);
+
+
+
+CREATE UNIQUE INDEX XPKEquipment ON Equipment
+(nameEquipment  ASC);
+
+
+
+ALTER TABLE Equipment
+	ADD CONSTRAINT  XPKEquipment PRIMARY KEY (nameEquipment);
+
+
+
+CREATE TABLE InstallationGTPS
+(
+	idStage		  INTEGER  NOT NULL ,
+	nameEquipment	  VARCHAR2(300)  NULL ,
+	nameInstallationPhases  VARCHAR2(45)  NULL ,
+	nameMounts	  VARCHAR2(200)  NULL 
+);
+
+
+
+CREATE UNIQUE INDEX XPKInstallationGTPS ON InstallationGTPS
+(idStage  ASC);
+
+
+
+ALTER TABLE InstallationGTPS
+	ADD CONSTRAINT  XPKInstallationGTPS PRIMARY KEY (idStage);
+
+
+
+CREATE TABLE InstallationPhases
+(
+	InstallationPhases_No  INTEGER  NULL ,
+	nameInstallationPhases  VARCHAR2(45)  NOT NULL 
+);
+
+
+
+CREATE UNIQUE INDEX XPKInstallationPhases ON InstallationPhases
+(nameInstallationPhases  ASC);
+
+
+
+ALTER TABLE InstallationPhases
+	ADD CONSTRAINT  XPKInstallationPhases PRIMARY KEY (nameInstallationPhases);
+
+
+
+CREATE TABLE Mounts
+(
+	Mounts_No	  INTEGER  NULL ,
+	nameMounts	  VARCHAR2(200)  NOT NULL 
+);
+
+
+
+CREATE UNIQUE INDEX XPKMounts ON Mounts
+(nameMounts  ASC);
+
+
+
+ALTER TABLE Mounts
+	ADD CONSTRAINT  XPKMounts PRIMARY KEY (nameMounts);
+
+
+
+ALTER TABLE InstallationGTPS
+	ADD (CONSTRAINT  Equipment_InstallationGTPS FOREIGN KEY (nameEquipment) REFERENCES Equipment(nameEquipment) ON DELETE SET NULL);
+
+
+
+ALTER TABLE InstallationGTPS
+	ADD (CONSTRAINT  InstaPhases_InstallationGTPS FOREIGN KEY (nameInstallationPhases) REFERENCES InstallationPhases(nameInstallationPhases) ON DELETE SET NULL);
+
+
+
+ALTER TABLE InstallationGTPS
+	ADD (CONSTRAINT  Mounts_InstallationGTPS FOREIGN KEY (nameMounts) REFERENCES Mounts(nameMounts) ON DELETE SET NULL);
+
+
