@@ -1,0 +1,131 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Mounts`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Mounts` (
+  `idMounts` INT NOT NULL AUTO_INCREMENT,
+  `nameMounts` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`idMounts`),
+  UNIQUE INDEX `idMounts_UNIQUE` (`idMounts` ASC) VISIBLE,
+  UNIQUE INDEX `nameMounts_UNIQUE` (`nameMounts` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`InstallationPhases`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`InstallationPhases` (
+  `idInstallationPhases` INT NOT NULL AUTO_INCREMENT,
+  `nameInstallationPhases` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idInstallationPhases`),
+  UNIQUE INDEX `idInstallationPhases_UNIQUE` (`idInstallationPhases` ASC) VISIBLE,
+  UNIQUE INDEX `nameInstallationPhases_UNIQUE` (`nameInstallationPhases` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Equipment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Equipment` (
+  `idEquipment` INT NOT NULL AUTO_INCREMENT,
+  `nameEquipment` VARCHAR(300) NOT NULL,
+  PRIMARY KEY (`idEquipment`),
+  UNIQUE INDEX `idEquipment_UNIQUE` (`idEquipment` ASC) VISIBLE,
+  UNIQUE INDEX `nameEquipment_UNIQUE` (`nameEquipment` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`InstallationGTPS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`InstallationGTPS` (
+  `idStage` INT NOT NULL AUTO_INCREMENT,
+  `nameInstallationPhases` VARCHAR(45) NOT NULL,
+  `nameMounts` VARCHAR(200) NULL,
+  `nameEquipment` VARCHAR(300) NOT NULL,
+  PRIMARY KEY (`idStage`),
+  UNIQUE INDEX `idStage_UNIQUE` (`idStage` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Mounts`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Mounts` (`idMounts`, `nameMounts`) VALUES (1, 'Анкерные шпильки');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `mydb`.`InstallationPhases`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`InstallationPhases` (`idInstallationPhases`, `nameInstallationPhases`) VALUES (1, 'Первая фаза');
+INSERT INTO `mydb`.`InstallationPhases` (`idInstallationPhases`, `nameInstallationPhases`) VALUES (2, 'Вторая фаза');
+INSERT INTO `mydb`.`InstallationPhases` (`idInstallationPhases`, `nameInstallationPhases`) VALUES (3, 'Третья фаза');
+INSERT INTO `mydb`.`InstallationPhases` (`idInstallationPhases`, `nameInstallationPhases`) VALUES (4, 'Четвёртая фаза');
+INSERT INTO `mydb`.`InstallationPhases` (`idInstallationPhases`, `nameInstallationPhases`) VALUES (5, 'Пятая фаза');
+INSERT INTO `mydb`.`InstallationPhases` (`idInstallationPhases`, `nameInstallationPhases`) VALUES (6, 'Шестая фаза');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `mydb`.`Equipment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (1, 'Электрогенератор');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (2, 'Турбоблоки');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (3, 'Укрытие системы автоматического управления');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (4, 'Глушитель выхлопа генератора');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (5, 'Выхлопные трубы ГТУ');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (6, 'Глушители всаса');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (7, 'Воздухозаборники вторичного воздуха');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (8, 'Фильтры всаса');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (9, 'Шина');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (10, 'Силовые кабели');
+INSERT INTO `mydb`.`Equipment` (`idEquipment`, `nameEquipment`) VALUES (11, 'Управляющие кабели');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `mydb`.`InstallationGTPS`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mydb`;
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (1, 'Первая фаза', 'Анкерные шпильки', 'Электрогенератор');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (2, 'Вторая фаза', NULL, 'Турбоблоки');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (3, 'Третья фаза', 'Анкерные шпильки', 'Укрытие систем автоматического управления');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (4, 'Третья фаза', NULL, 'Глушитель выхлопа генератора');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (5, 'Третья фаза', NULL, 'Выхлопные трубы ГТУ');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (6, 'Четвёртая фаза', NULL, 'Глушитель всаса');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (7, 'Четвёртая фаза', NULL, 'Воздухозаборники вторичного воздуха');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (8, 'Пятая фаза', NULL, 'Фильтры всаса');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (9, 'Пятая фаза', NULL, 'Шина');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (10, 'Шестая фаза', NULL, 'Силовые кабели');
+INSERT INTO `mydb`.`InstallationGTPS` (`idStage`, `nameInstallationPhases`, `nameMounts`, `nameEquipment`) VALUES (11, 'Шестая фаза', NULL, 'Управляющие кабели');
+
+COMMIT;
+
